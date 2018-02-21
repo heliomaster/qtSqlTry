@@ -26,24 +26,27 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.setupUi(self)
         self.LaBase = LaBase()
 
+        self.model = QSqlTableModel()
+        self.model.setTable("Contact")
+        self.model.select()
+        self.model.setHeaderData(1, Qt.Horizontal, u"pilot_1")
+        self.model.setHeaderData(2, Qt.Horizontal, "datetime1")
+        self.model.setHeaderData(3, Qt.Horizontal, "datetime2")
+
+        self.tableView1.setModel(self.model)
+
+    @pyqtSlot()
+    def on_pushButton_clicked(self):
+        self.lineEditPilote.text()
 
 
 
 
 
 
-        # #Création de la basse de données
-        # self.db = QSqlDatabase.addDatabase("QSQLITE") ## Nous indiquons ici le driver avec lequel nous souhaitons travailler.
-        # ## Les driver permettent de définir avec quel type de bases de données nous allons travailler.
-        # ## Notez qu'il en existe un grand nombre et qu'il vous est même possible d'en personnaliser. Mais ceci sort du contexte actuel.
-        # self.db.setDatabaseName('myBdd') ## Nous nommons ici notre base de données.
-        # self.db.open() ## Commande permettant d'accéder à la base de données
-        #
-        # query = QSqlQuery()
-        # query.exec_('''create table Contact (id INTEGER PRIMARY KEY,nom TEXT, prenom TEXT)''')
-        # ## Création de la table Contact dans notre base de données ouverte.
-        # self.db.commit() ## Enregistrement de la base de données
-        # self.db.close() ## Fermeture de celle-ci
+
+
+
 
 
 if __name__ == '__main__':

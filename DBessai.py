@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtSql import *
-import ui_main
+from ui_main import MainDialog
+from qtSqlTry import Ui_Form
+
 
 class LaBase():
     def __init__(self):
@@ -11,7 +13,7 @@ class LaBase():
         self.db = QSqlDatabase.addDatabase("QSQLITE") ## Nous indiquons ici le driver avec lequel nous souhaitons travailler.
         ## Les driver permettent de définir avec quel type de bases de données nous allons travailler.
         ## Notez qu'il en existe un grand nombre et qu'il vous est même possible d'en personnaliser. Mais ceci sort du contexte actuel.
-        self.db.setDatabaseName('pilote') ## Nous nommons ici notre base de données.
+        self.db.setDatabaseName('pilote1')  ## Nous nommons ici notre base de données.
         self.db.open() ## Commande permettant d'accéder à la base de données
 
         query = QSqlQuery()
