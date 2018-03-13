@@ -35,7 +35,10 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.model.setHeaderData(3, Qt.Horizontal, "datetime2")
         self.tableView1.setModel(self.model)
 
-        self.pushButton.clicked.connect(self.insertion)
+    @pyqtSlot()
+    def on_pushButton_clicked(self):
+        self.insertion()
+        # self.pushButton.clicked.connect(self.insertion)
         self.pushButton.clicked.connect(self.affiche)
 
     def insertion(self):
@@ -81,8 +84,17 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
     def effacer(self):
         pass
 
-    def calcul(self):
-        self.Lecture().
+    def calcultemps(self):
+        le_resultat = self.Lecture()
+        le_resultat[2]
+        print(le_resultat)
+
+    @pyqtSlot()
+    def on_Calcul_clicked(self):
+        labasevar = LaBase.Lire
+        print(labasevar(self))
+
+
 
 
 

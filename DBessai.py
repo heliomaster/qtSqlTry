@@ -14,17 +14,38 @@ class LaBase():
         ## Les driver permettent de définir avec quel type de bases de données nous allons travailler.
         ## Notez qu'il en existe un grand nombre et qu'il vous est même possible d'en personnaliser. Mais ceci sort du contexte actuel.
         self.db.setDatabaseName('pilote1')  ## Nous nommons ici notre base de données.
+
         self.db.open() ## Commande permettant d'accéder à la base de données
 
         query = QSqlQuery()
         query.exec_('''create table Contact (id INTEGER PRIMARY KEY,pilot_1 TEXT, datetime1 TEXT, datetime2 TEXT)''')
+        query.exec_('''create table Contact1 (id INTEGER PRIMARY KEY,pilot_1 TEXT, datetime1 TEXT, datetime2 TEXT)''')
         ## Création de la table Contact dans notre base de données ouverte.
         self.db.commit() ## Enregistrement de la base de données
         self.db.close() ## Fermeture de celle-ci
 
+    def Lire(self):
+        query = QSqlQuery("""SELECT pilot_1,datetime_1, datetime2 FROM Contact1""")
+        R = []
+        while query.next():
+            R.append([])
+            J = 0
+            while True:
+                val = query.value(j)
+                if val == None:
+                    break
+
+                R[-1].append(val)
+                J += 1
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     LaBase()
-
-
-
