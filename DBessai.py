@@ -24,19 +24,18 @@ class LaBase():
         self.db.commit() ## Enregistrement de la base de données
         self.db.close() ## Fermeture de celle-ci
 
-    def Lire(self):
-        query = QSqlQuery("""SELECT pilot_1,datetime_1, datetime2 FROM Contact1""")
-        R = []
-        while query.next():
-            R.append([])
-            J = 0
-            while True:
-                val = query.value(j)
-                if val == None:
-                    break
+    # def Lire(self):
+    #     self.db.open()
+    #     query = self.db.exec_("""select * from Contact""")
+    #     while query.next():
+    #         value = []
+    #         record = query.record()
+    #         for index in range(record.count()):
+    #             value.append(str(record.value(index)))
+    #         print(';'.join(value))
 
-                R[-1].append(val)
-                J += 1
+
+
 
 
 

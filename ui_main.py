@@ -89,10 +89,22 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         le_resultat[2]
         print(le_resultat)
 
+    def Lire(self):
+        self.LaBase.db.open()
+        query = self.LaBase.db.exec_("""select * from Contact1""")
+        while query.next():
+            value = []
+            record = query.record()
+            for index in range(record.count()):
+                value.append(str(record.value(index)))
+            #return (';'.join(value))
+            print(';'.join(value))
+        self.LaBase.db.close()
+
     @pyqtSlot()
     def on_Calcul_clicked(self):
-        labasevar = LaBase.Lire
-        print(labasevar(self))
+        print(self.Lire())
+        #print(labasevar(self))
 
 
 
