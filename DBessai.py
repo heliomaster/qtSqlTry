@@ -25,26 +25,14 @@ class LaBase():
         self.db.close() ## Fermeture de celle-ci
 
     def Lire(self):
-        query = QSqlQuery("""SELECT pilot_1,datetime_1, datetime2 FROM Contact1""")
-        R = []
+        index = 0
+        query = QSqlQuery()
+        query.exec_("select * FROM Contact")
         while query.next():
-            R.append([])
-            J = 0
-            while True:
-                val = query.value(j)
-                if val == None:
-                    break
-
-                R[-1].append(val)
-                J += 1
-
-
-
-
-
-
-
-
+            ids = query.value(0)
+            pil1 = query.value(1)
+            pil2 = query.value(2)
+        print(ids, pil1, pil2)
 
 
 if __name__ == '__main__':
