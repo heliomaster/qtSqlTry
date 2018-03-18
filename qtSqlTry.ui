@@ -64,7 +64,7 @@
     <rect>
      <x>30</x>
      <y>340</y>
-     <width>381</width>
+     <width>392</width>
      <height>80</height>
     </rect>
    </property>
@@ -93,6 +93,16 @@
       </property>
       <property name="text">
        <string>Effacer</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="calule_temps">
+      <property name="toolTip">
+       <string extracomment="calcule le temps total"/>
+      </property>
+      <property name="text">
+       <string>calculTemps</string>
       </property>
      </widget>
     </item>

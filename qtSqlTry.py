@@ -24,9 +24,10 @@ class Ui_Form(object):
         self.dateTimeEdit_2.setObjectName("dateTimeEdit_2")
         self.tableView1 = QtWidgets.QTableView(Form)
         self.tableView1.setGeometry(QtCore.QRect(30, 130, 711, 192))
+        self.tableView1.setSortingEnabled(True)
         self.tableView1.setObjectName("tableView1")
         self.horizontalLayoutWidget = QtWidgets.QWidget(Form)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(30, 340, 381, 80))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(30, 340, 392, 80))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -41,6 +42,10 @@ class Ui_Form(object):
         self.pushButton_effacer.setWhatsThis("")
         self.pushButton_effacer.setObjectName("pushButton_effacer")
         self.horizontalLayout_2.addWidget(self.pushButton_effacer)
+        self.calule_temps = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.calule_temps.setToolTip("")
+        self.calule_temps.setObjectName("calule_temps")
+        self.horizontalLayout_2.addWidget(self.calule_temps)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -51,4 +56,5 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "PushButton"))
         self.Calcul.setText(_translate("Form", "Calcul"))
         self.pushButton_effacer.setText(_translate("Form", "Effacer"))
+        self.calule_temps.setText(_translate("Form", "calculTemps"))
 
