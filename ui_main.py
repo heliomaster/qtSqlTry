@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -17,16 +16,15 @@ from DB_manager import tableModelQtsqlTry
 from DBessai import *
 
 
-
-#To incorporate UI_view_SARAA inherit QDialog, and UI_view
+# To incorporate UI_view_SARAA inherit QDialog, and UI_view
 class MainDialog(QDialog, qtSqlTry.Ui_Form):
 
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super(MainDialog, self).__init__(parent)
         self.setupUi(self)
         # appel de la classe du module dbessai
         self.LaBase = LaBase()
-        #tablemodel = editable data model
+        # tablemodel = editable data model
         self.model = QSqlTableModel()
         self.model.setEditStrategy(QSqlTableModel.OnRowChange)
         self.model.setTable("Contact1")
@@ -34,14 +32,8 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.model.setHeaderData(1, Qt.Horizontal, u"pilot_1")
         self.model.setHeaderData(2, Qt.Horizontal, "datetime1")
         self.model.setHeaderData(3, Qt.Horizontal, "datetime2")
-        #tableview created in qt designer assigned to tablemodel
+        # tableview created in qt designer assigned to tablemodel
         self.tableView1.setModel(self.model)
-
-    @pyqtSlot()
-    def on_pushButton_clicked(self):
-        self.insertion()
-        # self.pushButton.clicked.connect(self.insertion)
-        self.pushButton.clicked.connect(self.affiche)
 
     def insertion(self):
         self.LaBase.db.open()
@@ -64,7 +56,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.model.submitAll()
         self.LaBase.db.close()
 
-    def Lecture(self):
+    def lecture(self):
         liste = []
         self.LaBase.db.open()
         self.model.setTable("Contact1")
@@ -80,21 +72,15 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         return liste
 
     def affiche(self):
-        la_liste = self.Lecture()
+        la_liste = self.lecture()
         print(la_liste)
 
-    @pyqtSlot()
-    def on_pushButton_effacer_clicked(self):
-        self.effacer()
-
-
-
     def calcultemps(self):
-        le_resultat = self.Lecture()
-        le_resultat[2]
-        print(le_resultat)
+        pass
 
-    def Lire(self):
+
+
+    def lire(self):
         self.LaBase.db.open()
         query = self.LaBase.db.exec_("""select * from Contact1""")
         while query.next():
@@ -102,14 +88,15 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             record = query.record()
             for index in range(record.count()):
                 value.append(str(record.value(index)))
+            print(value[2]+value[3])
             #return (';'.join(value))
             print(';'.join(value))
         self.LaBase.db.close()
 
-
     def effacer(self):
         index = self.tableView1.currentIndex()
-        deleteconf = QMessageBox.critical(self.parent(),"DELETE ROW","REALLY DELETE?",QMessageBox.Yes,QMessageBox.No)
+        deleteconf = QMessageBox.critical(self.parent(), "DELETE ROW", "REALLY DELETE?", QMessageBox.Yes,
+                                          QMessageBox.No)
         if deleteconf == QMessageBox.Yes:
             self.model.removeRow(index.row())
             self.model.submitAll()
@@ -125,20 +112,21 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         #     self.model.removeRow(index.row())
         # self.LaBase.db.close()
 
-
-
     @pyqtSlot()
     def on_Calcul_clicked(self):
-        print(self.Lire())
-        #print(labasevar(self))
+        return self.lire()
+        print(self.lire())
+        # print(labasevar(self))
 
+    @pyqtSlot()
+    def on_pushButton_clicked(self):
+        self.insertion()
+        # self.pushButton.clicked.connect(self.insertion)
+        self.pushButton.clicked.connect(self.affiche)
 
-
-
-
-
-
-
+    @pyqtSlot()
+    def on_pushButton_effacer_clicked(self):
+        self.effacer()
 
         # self.db.close()
 
@@ -151,7 +139,7 @@ if __name__ == '__main__':
     try:
         app = QApplication(sys.argv)
         form = MainDialog()
-        #LaBase()
+        # LaBase()
         form.show()
         app.exec_()
         sys.exit(0)
@@ -161,5 +149,3 @@ if __name__ == '__main__':
         print("Closing Window....")
     except Exception:
         print(sys.exc_info()[1])
-
-
