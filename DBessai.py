@@ -24,15 +24,15 @@ class LaBase():
         self.db.commit() ## Enregistrement de la base de données
         self.db.close() ## Fermeture de celle-ci
 
-    # def Lire(self):
-    #     self.db.open()
-    #     query = self.db.exec_("""select * from Contact""")
-    #     while query.next():
-    #         value = []
-    #         record = query.record()
-    #         for index in range(record.count()):
-    #             value.append(str(record.value(index)))
-    #         print(';'.join(value))
+        # def Lire(self):
+        #     self.db.open()
+        #     query = self.db.exec_("""select * from Contact""")
+        #     while query.next():
+        #         value = []
+        #         record = query.record()
+        #         for index in range(record.count()):
+        #             value.append(str(record.value(index)))
+        #         print(';'.join(value))
 
 
 

@@ -26,7 +26,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.setupUi(self)
         # appel de la classe du module dbessai
         self.LaBase = LaBase()
-        #tablemodel = editable data model
+        # tablemodel = editable data model
         self.model = QSqlTableModel()
         self.model.setEditStrategy(QSqlTableModel.OnRowChange)
         self.model.setTable("Contact1")
@@ -34,7 +34,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.model.setHeaderData(1, Qt.Horizontal, u"pilot_1")
         self.model.setHeaderData(2, Qt.Horizontal, "datetime1")
         self.model.setHeaderData(3, Qt.Horizontal, "datetime2")
-        #tableview created in qt designer assigned to tablemodel
+        # tableview created in qt designer assigned to tablemodel
         self.tableView1.setModel(self.model)
 
     @pyqtSlot()
@@ -87,8 +87,6 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
     def on_pushButton_effacer_clicked(self):
         self.effacer()
 
-
-
     def calcultemps(self):
         le_resultat = self.Lecture()
         le_resultat[2]
@@ -102,14 +100,14 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             record = query.record()
             for index in range(record.count()):
                 value.append(str(record.value(index)))
-            #return (';'.join(value))
+            # return (';'.join(value))
             print(';'.join(value))
         self.LaBase.db.close()
 
-
     def effacer(self):
         index = self.tableView1.currentIndex()
-        deleteconf = QMessageBox.critical(self.parent(),"DELETE ROW","REALLY DELETE?",QMessageBox.Yes,QMessageBox.No)
+        deleteconf = QMessageBox.critical(self.parent(), "DELETE ROW", "REALLY DELETE?", QMessageBox.Yes,
+                                          QMessageBox.No)
         if deleteconf == QMessageBox.Yes:
             self.model.removeRow(index.row())
             self.model.submitAll()
@@ -117,13 +115,13 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             return
         else:
             return
-        # self.LaBase.db.open()
-        # #self.model.setTable("Contact1")
-        # #model = self.model
-        # indices = self.tableView1.selectionModel().selectedRow()
-        # for index in sorted(indices):
-        #     self.model.removeRow(index.row())
-        # self.LaBase.db.close()
+            # self.LaBase.db.open()
+            # #self.model.setTable("Contact1")
+            # #model = self.model
+            # indices = self.tableView1.selectionModel().selectedRow()
+            # for index in sorted(indices):
+            #     self.model.removeRow(index.row())
+            # self.LaBase.db.close()
 
 
 

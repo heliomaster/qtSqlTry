@@ -51,4 +51,3 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "PushButton"))
         self.Calcul.setText(_translate("Form", "Calcul"))
         self.pushButton_effacer.setText(_translate("Form", "Effacer"))
-
