@@ -18,6 +18,7 @@ from DBessai import *
 
 # To incorporate UI_view_SARAA inherit QDialog, and UI_view
 class MainDialog(QDialog, qtSqlTry.Ui_Form):
+
     def __init__(self, parent=None):
         super(MainDialog, self).__init__(parent)
         self.setupUi(self)
@@ -25,41 +26,35 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.LaBase = LaBase()
         # tablemodel = editable data model
         self.model = QSqlTableModel()
-        self.model.setEditStrategy(QSqlTableModel.OnFieldChange)
-        self.model.setTable("Contact")
+        self.model.setEditStrategy(QSqlTableModel.OnRowChange)
+        self.model.setTable("Contact1")
         self.model.select()
         self.model.setHeaderData(1, Qt.Horizontal, u"pilot_1")
         self.model.setHeaderData(2, Qt.Horizontal, "datetime1")
         self.model.setHeaderData(3, Qt.Horizontal, "datetime2")
         # tableview created in qt designer assigned to tablemodel
         self.tableView1.setModel(self.model)
-        #
-        # def insertion(self):
-        #     # self.LaBase.db.open()
-        #     liste = [self.lineEditPilote.text(), self.dateTimeEdit_1.dateTime(), self.dateTimeEdit_2.dateTime()]
-        #     self.model.setTable("Contact1")
-        #     # self.model.select()
-        #     # On insère une ligne supplémentaire qui sera remplie par la suite.
-        #     # Si cette ligne de code est oubliée, c'est une modification qui sera effectuée
-        #     self.model.insertRows(0, 1)
-        #     # Nous créons une boucle permettant de rentrer les valeurs des QLineEdit dans notre base de données
-        #     a = 0
-        #     while a <= 2:
-        #         ## setData() requiert en premier argument l'index de la ligne à créer, en deuxième la valeur.
-        #         ## Ici dans le premier argument a+1 correspond à la deuxième colonne de notre table si a = 0.
-        #         # On laisse la première colonne se remplir seule (clé automatique).
-        #         ## Le premier argument de self.model.index peut prendre n'importe quelle valeur. Ceci ne change rien.
-        #         self.model.setData(self.model.index(0, a + 1), liste[a])
-        #         a += 1
-        #     self.model.submitAll()
-        #     # self.LaBase.db.close()
 
-    ####################nouvelle insertion dans table contact################################
-    def insertion_table_contact(self):
-        rowpos = self.model.rowCount()
-        self.model.insertRecord(-1, rowpos)
+    def insertion(self):
+        # self.LaBase.db.open()
+        liste = [self.lineEditPilote.text(), self.dateTimeEdit_1.dateTime(), self.dateTimeEdit_2.dateTime()]
+        self.model.setTable("Contact1")
+        # self.model.select()
+        # On insère une ligne supplémentaire qui sera remplie par la suite.
+        # Si cette ligne de code est oubliée, c'est une modification qui sera effectuée
+        self.model.insertRows(0, 1)
+        # Nous créons une boucle permettant de rentrer les valeurs des QLineEdit dans notre base de données
+        a = 0
+        while a <= 2:
+            ## setData() requiert en premier argument l'index de la ligne à créer, en deuxième la valeur.
+            ## Ici dans le premier argument a+1 correspond à la deuxième colonne de notre table si a = 0.
+            # On laisse la première colonne se remplir seule (clé automatique).
+            ## Le premier argument de self.model.index peut prendre n'importe quelle valeur. Ceci ne change rien.
+            self.model.setData(self.model.index(0, a + 1), liste[a])
+            a += 1
 
-    ####################     fin insertion ########################################
+        self.model.submitAll()
+        #self.LaBase.db.close()
 
     def lecture(self):
         liste = []
@@ -77,7 +72,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         return liste
 
     def affiche(self):
-        # self.lecture()
+        #self.lecture()
         print(self.lecture())
 
     def calcultemps(self):
@@ -135,15 +130,14 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
     @pyqtSlot()
     def on_Calcul_clicked(self):
         return self.lire()
-        # print(self.lire())
+        #print(self.lire())
         #print(labasevar(self))
-
     #
     @pyqtSlot()
     def on_pushButton_clicked(self):
-        self.insertion_table_contact()
+        self.insertion()
         # self.pushButton.clicked.connect(self.insertion)
-        #self.pushButton.clicked.connect(self.affiche)
+        self.pushButton.clicked.connect(self.affiche)
 
     @pyqtSlot()
     def on_pushButton_effacer_clicked(self):
