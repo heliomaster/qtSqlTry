@@ -93,7 +93,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="calule_temps">
+      <widget class="QPushButton" name="calcul_temps">
        <property name="toolTip">
         <string extracomment="calcule le temps total"/>
        </property>
