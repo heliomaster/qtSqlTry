@@ -20,6 +20,7 @@ class LaBase():
         query = QSqlQuery()
         query.exec_('''create table Contact (id INTEGER PRIMARY KEY,pilot_1 TEXT, datetime1 TEXT, datetime2 TEXT)''')
         query.exec_('''create table Contact1 (id INTEGER PRIMARY KEY,pilot_1 TEXT, datetime1 TEXT, datetime2 TEXT)''')
+
         ## Création de la table Contact dans notre base de données ouverte.
         self.db.commit() ## Enregistrement de la base de données
         self.db.close() ## Fermeture de celle-ci

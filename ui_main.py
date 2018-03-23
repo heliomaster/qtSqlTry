@@ -52,7 +52,6 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             ## Le premier argument de self.model.index peut prendre n'importe quelle valeur. Ceci ne change rien.
             self.model.setData(self.model.index(0, a + 1), liste[a])
             a += 1
-
         self.model.submitAll()
         #self.LaBase.db.close()
 
@@ -84,8 +83,15 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             datetime1 = query.value(0)
             datetime2 = query.value(1)
             print(datetime1, datetime2)
-            diff = datetime2 - datetime1
+            # TODO: VERIF DATETIME1 ET Z A LA FIN
+            diff = datetime.strptime(datetime2, "%Y-%m-%dT%H:%M:%S.%f") - datetime.strptime(datetime1,
+                                                                                            "%Y-%m-%dT%H:%M:%S.%fZ")
+            return diff
             print(diff)
+
+    def inserer_calule_bdd(self):
+        
+
 
 
 
