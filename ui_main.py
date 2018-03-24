@@ -76,7 +76,8 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         print(la_liste)
 
     def calcultemps(self):
-        pass
+        valeur = self.value
+        
 
 
 
@@ -91,6 +92,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             print(value[2]+value[3])
             #return (';'.join(value))
             print(';'.join(value))
+            return value
         self.LaBase.db.close()
 
     def effacer(self):
