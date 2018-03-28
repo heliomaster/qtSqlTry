@@ -6,7 +6,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtSql import *
-import time
+from datetime import datetime
 
 import sys
 import os
@@ -36,7 +36,7 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         self.tableView1.setModel(self.model)
 
     def insertion(self):
-        self.LaBase.db.open()
+        # self.LaBase.db.open()
         liste = [self.lineEditPilote.text(), self.dateTimeEdit_1.dateTime(), self.dateTimeEdit_2.dateTime()]
         self.model.setTable("Contact1")
         # self.model.select()
@@ -52,9 +52,8 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             ## Le premier argument de self.model.index peut prendre n'importe quelle valeur. Ceci ne change rien.
             self.model.setData(self.model.index(0, a + 1), liste[a])
             a += 1
-
         self.model.submitAll()
-        self.LaBase.db.close()
+        #self.LaBase.db.close()
 
     def lecture(self):
         liste = []
@@ -72,28 +71,44 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
         return liste
 
     def affiche(self):
-        la_liste = self.lecture()
-        print(la_liste)
+        #self.lecture()
+        print(self.lecture())
 
     def calcultemps(self):
-        valeur = self.value
+        self.lire()
+
+    def lire(self):
+        query = self.LaBase.db.exec_("SELECT datetime1,datetime2 FROM Contact1")
+        while query.next():
+            datetime1 = query.value(0)
+            datetime2 = query.value(1)
+            print(datetime1, datetime2)
+            # TODO: VERIF DATETIME1 ET Z A LA FIN
+            diff = datetime.strptime(datetime2, "%Y-%m-%dT%H:%M:%S.%f") - datetime.strptime(datetime1,
+                                                                                            "%Y-%m-%dT%H:%M:%S.%fZ")
+            return diff
+            print(diff)
+
+    def inserer_calule_bdd(self):
         
 
 
 
-    def lire(self):
-        self.LaBase.db.open()
-        query = self.LaBase.db.exec_("""select * from Contact1""")
-        while query.next():
-            value = []
-            record = query.record()
-            for index in range(record.count()):
-                value.append(str(record.value(index)))
-            print(value[2]+value[3])
-            #return (';'.join(value))
-            print(';'.join(value))
-            return value
-        self.LaBase.db.close()
+
+
+            # self.LaBase.db.open()
+            # query = self.LaBase.db.exec_("""select * from Contact1""")
+            # while query.next():
+            #     value = []
+            #     record = query.record()
+            #     for index in range(record.count()):
+            #         value.append(record.value(index))
+            #         #return (';'.join(answer))
+            #     print(value)
+
+            # return (';'.join(value))
+            # print(';'.join(value))
+            # self.LaBase.db.close()
 
     def effacer(self):
         index = self.tableView1.currentIndex()
@@ -106,20 +121,24 @@ class MainDialog(QDialog, qtSqlTry.Ui_Form):
             return
         else:
             return
-        # self.LaBase.db.open()
-        # #self.model.setTable("Contact1")
-        # #model = self.model
-        # indices = self.tableView1.selectionModel().selectedRow()
-        # for index in sorted(indices):
-        #     self.model.removeRow(index.row())
-        # self.LaBase.db.close()
+            # self.LaBase.db.open()
+            # #self.model.setTable("Contact1")
+            # #model = self.model
+            # indices = self.tableView1.selectionModel().selectedRow()
+            # for index in sorted(indices):
+            #     self.model.removeRow(index.row())
+            # self.LaBase.db.close()
+
+    @pyqtSlot()
+    def on_calcul_temps_clicked(self):
+        print(self.calcultemps())
 
     @pyqtSlot()
     def on_Calcul_clicked(self):
         return self.lire()
-        print(self.lire())
-        # print(labasevar(self))
-
+        #print(self.lire())
+        #print(labasevar(self))
+    #
     @pyqtSlot()
     def on_pushButton_clicked(self):
         self.insertion()

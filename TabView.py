@@ -2,11 +2,12 @@
 
 # Form implementation generated from reading ui file 'TabView.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -18,6 +19,7 @@ class Ui_Dialog(object):
         self.Insertion = QtWidgets.QWidget()
         self.Insertion.setObjectName("Insertion")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.Insertion)
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -62,6 +64,7 @@ class Ui_Dialog(object):
         self.Limites = QtWidgets.QWidget()
         self.Limites.setObjectName("Limites")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.Limites)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -105,4 +108,3 @@ class Ui_Dialog(object):
         self.Tab.setTabText(self.Tab.indexOf(self.Limites), _translate("Dialog", "Limites"))
         self.Tab.setTabText(self.Tab.indexOf(self.tab_5), _translate("Dialog", "Page"))
         self.Tab.setTabText(self.Tab.indexOf(self.tab_6), _translate("Dialog", "Page"))
-
